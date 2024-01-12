@@ -4,38 +4,14 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>JavaScript AST</title>
-    <style>
-      body {
-        margin: 0;
-        padding: 0;
-        height: 100vh;
-        font-family: sans-serif;
-        background-color: #eee;
-      }
-      main {
-        display: flex;
-        flex-direction: column;
-        gap: 10px;
-        width: 100%;
-        /* max-width: 800px; */
-        margin: 0 auto;
-        padding: 20px;
-        height: 100%;
-        box-sizing: border-box;
-      }
-      textarea {
-        width: 100%;
-        height: 100%;
-        background-color: white;
-      }
-    </style>
+    <link rel="stylesheet" href="./index.css" />
   </head>
 
   <body>
     <main>
       <textarea
         id="source"
-        placeholder="// Enter JavaScript code here"
+        placeholder="// Enter JavaScript code here, it will be assumed to be a module."
       ></textarea>
       <textarea id="tree" readonly></textarea>
     </main>
