@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Readonly TextArea</title>
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+        height: 100vh;
+        font-family: sans-serif;
+        background-color: #f0f0f0;
+      }
+      main {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        width: 100%;
+        /* max-width: 800px; */
+        margin: 0 auto;
+        padding: 20px;
+        height: 100%;
+        box-sizing: border-box;
+      }
+      textarea {
+        width: 100%;
+        height: 100%;
+      }
+    </style>
+  </head>
+
+  <body>
+    <main>
+      <textarea id="source" placeholder="// Enter code here"></textarea>
+      <textarea id="tree" readonly></textarea>
+    </main>
+
+    <script type="module">
+      import { parseModule } from "./node_modules/esprima-next/dist/esprima.js";
+      import stringify from "./stringify.js";
+      const source = document.getElementById("source");
+      const tree = document.getElementById("tree");
+      function debounce(func, delay) {
+        let timeoutId;
+        return function () {
+          clearTimeout(timeoutId);
+          timeoutId = setTimeout(func, delay);
+        };
+      }
+
+      // Function to handle input (replace this with your desired action)
+      let count = 1;
+      function handleInput() {
+        try {
+          tree.style.color = "black";
+          tree.value = stringify(parseModule(source.value));
+        } catch (err) {
+          tree.style.color = "#a00";
+          tree.value = err.message;
+        }
+      }
+
+      source.addEventListener("input", debounce(handleInput, 1000));
+    </script>
+  </body>
+</html>

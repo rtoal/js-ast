@@ -1,2 +1,3 @@
 # js-ast
-Command-line AST Viewer for JavaScript using esprima-next
+
+A little browser-based app. Enter a JS module in the upper box and an AST will appear in the lower box.
