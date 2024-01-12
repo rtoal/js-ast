@@ -27,10 +27,15 @@ export default function stringify(root) {
               "generator",
               "optional",
               "computed",
-              "expression",
               "delegate",
+              "expression",
+              "shorthand",
+              "method",
               "static",
-            ].includes(k) || v === true
+            ].includes(k) || v !== false
+        )
+        .filter(
+          ([k, v]) => !["superClass", "decorators"].includes(k) || v !== null
         )
         .map(([k, v]) => `${k}=${view(v)}`);
       yield `${String(id).padStart(4, " ")} | ${type} ${props.join(" ")}`;
