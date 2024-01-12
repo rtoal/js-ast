@@ -1,4 +1,4 @@
-import { parseModule } from "./node_modules/esprima-next/dist/esprima.js";
+import { parseModule } from "./esprima.js";
 import stringify from "./stringify.js";
 
 const source = document.getElementById("source");
