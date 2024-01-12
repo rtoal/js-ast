@@ -14,6 +14,7 @@ export default function stringify(root) {
       if (tags.has(e)) return `#${tags.get(e)}`;
       if (Array.isArray(e)) return `[${e.map(view)}]`;
       if (e?.constructor === Function) return "<Function>";
+      if (e?.constructor === BigInt) return e;
       return JSON.stringify(e);
     }
     for (let [node, id] of [...tags.entries()].sort((a, b) => a[1] - b[1])) {
