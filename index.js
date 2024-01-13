@@ -15,10 +15,10 @@ function debounce(func, delay) {
 function handleInput() {
   try {
     tree.style.color = "black"
-    tree.value = stringify(parseModule(source.value))
+    tree.innerHTML = stringify(parseModule(source.value))
   } catch (err) {
     tree.style.color = "#a00"
-    tree.value = err.message
+    tree.innerHTML = err.message
   }
 }
 
