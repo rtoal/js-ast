@@ -12,7 +12,6 @@ export default function stringify(root) {
   }
 
   function ast(node, indent = 0, prefix = "") {
-    console.log(node)
     if (node === null || typeof node !== "object") return
 
     // Esprima's type field is much nicer than the node's constructor name.
