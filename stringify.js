@@ -12,6 +12,7 @@ export default function stringify(root) {
   }
 
   function ast(node, indent = 0, prefix = "") {
+    console.log(node)
     if (node === null || typeof node !== "object") return
 
     // Esprima's type field is much nicer than the node's constructor name.
@@ -48,13 +49,17 @@ export default function stringify(root) {
       )
       .map(([k, v]) => `<span class='key'>${k}</span>=${view(v)}`)
 
-    // Show the line for the current object with its simple properties, then
-    // for each object property, show them indented on following lines.
+    // Show the line for the current object with its simple properties...
     let line = `${" ".repeat(indent)}<span class='key'>${prefix}</span>`
     if (prefix) line += ": "
+    line += `<strong>${type}</strong> ${simpleProps.join(" ")}`
+    lines.push(`<div style='margin-left:${indent * 20}px'>${line}</div>`)
+
+    // ...then for each object property, show indented on following lines.
     for (let [k, v] of Object.entries(objectProps)) {
       if (Array.isArray(v)) {
         for (let [i, e] of v.entries()) {
+          // Manufacture property names for array elements.
           ast(e, indent + 1, `${k}[${i}]`)
         }
       } else {
