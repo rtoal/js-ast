@@ -5,10 +5,11 @@ export default function stringify(root) {
     // This local function will never be called with an object. We can
     // usually use JSON.stringify, but not always. There are a few special
     // cases to handle.
-    if (typeof e === "function") return "<Function>"
-    if (typeof e === "symbol") return e.valueOf()
+    if (["function", "symbol"].includes(typeof e)) {
+      throw new Error("ASTs should not contain functions or symbols")
+    }
     if (typeof e == "bigint") return e
-    return JSON.stringify(e)
+    return JSON.stringify(e).replaceAll(/&/g, "&amp;").replaceAll(/</g, "&lt;")
   }
 
   function ast(node, indent = 0, prefix = "") {
